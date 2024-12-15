@@ -1,20 +1,19 @@
 'use client'
 
-import { Axios } from '@/services'
 import { GithubUserType } from '@/types'
-import { useQuery } from '@tanstack/react-query'
 import { Avatar, AvatarImage } from '../ui/avatar'
 import { Loader2, SquareArrowOutUpRightIcon } from 'lucide-react'
 import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip'
-import { ProfileProps } from '.'
 
-export const ProfileInfo = ({ username }: ProfileProps) => {
-  const { data: user, isLoading } = useQuery<GithubUserType>({
-    queryKey: ['user', 'info', username],
-    queryFn: () => Axios.get(`/users/${username}`).then((res) => res.data),
-  })
+type ProfileInfoProps = {
+  user: GithubUserType
+  isLoading: boolean
+}
 
-  return user ? (
+export const ProfileInfo = ({ user, isLoading }: ProfileInfoProps) => {
+  return isLoading ? (
+    <Loader2 className='animate-spin' />
+  ) : (
     <>
       <Tooltip>
         <TooltipTrigger asChild>
@@ -45,9 +44,5 @@ export const ProfileInfo = ({ username }: ProfileProps) => {
         )}
       </div>
     </>
-  ) : isLoading ? (
-    <Loader2 className='animate-spin' />
-  ) : (
-    <></>
   )
 }
