@@ -8,7 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Form, FormControl, FormField, FormItem, FormLabel } from '../ui/form'
 import { Input } from '../ui/input'
 import { DefaultError, useMutation } from '@tanstack/react-query'
-import { Axios } from '@/services'
+import { searchUser } from '@/services'
 import { GithubUserType } from '@/types'
 import { UserItem, UserItemSkeleton } from './user-item'
 import { useEffect } from 'react'
@@ -42,14 +42,7 @@ export function ProfileSearch() {
     mutate,
   } = useMutation<SearchResultDTO, DefaultError, SearchFormDTO>({
     mutationKey: ['search', 'username'],
-    mutationFn: (values: SearchFormDTO) =>
-      Axios.get('/search/users', {
-        params: {
-          per_page: 10,
-          page: 1,
-          q: values.username,
-        },
-      }),
+    mutationFn: (values: SearchFormDTO) => searchUser(values.username),
   })
 
   const handleUserClick = (username: string) =>

@@ -4,8 +4,9 @@ import { useQuery } from '@tanstack/react-query'
 import { ProfileInfo } from './info'
 import { Repositories } from './repos'
 import { GithubUserType } from '@/types'
-import { Axios } from '@/services'
+import { getUser } from '@/services'
 import { Notfound } from './404'
+import { Loader2 } from 'lucide-react'
 
 export type ProfileProps = {
   username: string
@@ -14,7 +15,7 @@ export type ProfileProps = {
 export const ProfileCard = ({ username }: ProfileProps) => {
   const { data: user, isLoading } = useQuery<GithubUserType>({
     queryKey: ['user', 'info', username],
-    queryFn: () => Axios.get(`/users/${username}`).then((res) => res.data),
+    queryFn: getUser(username),
   })
 
   return (
@@ -26,6 +27,8 @@ export const ProfileCard = ({ username }: ProfileProps) => {
             <Repositories username={username} />
           </div>
         </>
+      ) : isLoading ? (
+        <Loader2 className='animate-spin' />
       ) : (
         <Notfound />
       )}
