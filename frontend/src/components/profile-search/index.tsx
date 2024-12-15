@@ -5,7 +5,7 @@ import { z } from 'zod'
 import { useForm, useWatch } from 'react-hook-form'
 import { useDebounce } from '@uidotdev/usehooks'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Form, FormControl, FormField, FormItem } from '../ui/form'
+import { Form, FormControl, FormField, FormItem, FormLabel } from '../ui/form'
 import { Input } from '../ui/input'
 import { DefaultError, useMutation } from '@tanstack/react-query'
 import { Axios } from '@/services'
@@ -69,6 +69,7 @@ export function ProfileSearch() {
             name='username'
             render={({ field, fieldState }) => (
               <FormItem className='mb-2 flex w-full flex-col items-center'>
+                <FormLabel>Enter a username to search...</FormLabel>
                 <div className='flex w-full justify-between space-x-2 items-center'>
                   <FormControl className='w-[350px]'>
                     <Input placeholder='Username' {...field} />

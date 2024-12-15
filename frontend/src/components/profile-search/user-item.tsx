@@ -18,7 +18,7 @@ export const UserItem = ({
 }) => (
   <div
     onClick={onClick}
-    className='border rounded-lg cursor-pointer hover:bg-slate-100 px-4 p-2 flex items-center space-x-4'
+    className='border rounded-lg cursor-pointer dark:hover:bg-slate-900 hover:bg-slate-100 px-4 p-2 flex items-center space-x-4'
   >
     <Avatar>
       <AvatarImage src={user.avatar_url} />

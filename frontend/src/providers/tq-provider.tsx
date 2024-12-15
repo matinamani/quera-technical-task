@@ -28,14 +28,12 @@ function getQueryClient() {
   }
 }
 
-const QueryProvider = (props: { children: ReactNode }) => {
+const QueryProvider = ({ children }: { children: ReactNode }) => {
   const queryClient = getQueryClient()
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ReactQueryStreamedHydration>
-        {props.children}
-      </ReactQueryStreamedHydration>
+      <ReactQueryStreamedHydration>{children}</ReactQueryStreamedHydration>
     </QueryClientProvider>
   )
 }
