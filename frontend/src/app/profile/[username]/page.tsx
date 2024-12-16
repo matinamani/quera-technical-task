@@ -1,10 +1,10 @@
 import { ProfileCard } from '@/components/profile'
 
-type ProfilePageParams = {
+type ProfilePageProps = {
   params: Promise<{ username: string }>
 }
 
-export default async function ProfilePage({ params }: ProfilePageParams) {
+export default async function ProfilePage({ params }: ProfilePageProps) {
   const { username } = await params
 
   return (

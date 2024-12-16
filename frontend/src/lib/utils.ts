@@ -7,8 +7,12 @@ export function cn(...inputs: ClassValue[]) {
 
 export function approximateTimeDifference(diff: number) {
   const day = 24 * 60 * 60 * 1000
-  if (diff <= day * 1.5) return 'today'
-  if (diff > day && diff <= day * 14)
-    return `${Math.floor(diff / day)} days ago`
-  if (diff > 14 * day) return `${Math.floor(diff / (7 * day))} weeks ago`
+  switch (true) {
+    case diff <= day * 1.5:
+      return 'today'
+    case diff > day && diff <= day * 14:
+      return `${Math.floor(diff / day)} days ago`
+    case diff > day * 14:
+      return `${Math.floor(diff / (7 * day))} weeks ago`
+  }
 }
