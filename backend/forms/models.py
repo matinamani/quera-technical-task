@@ -8,7 +8,6 @@ from forms.constants import (
 )
 
 
-# Create your models here.
 class User(models.Model):
     username = models.CharField(max_length=50, unique=True, null=False)
     email = models.EmailField(null=True)

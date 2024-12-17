@@ -4,9 +4,9 @@ from .models import User, Form, Question, Answer
 
 class QuestionInline(admin.TabularInline):
     model = Question
-    extra = 1  # Number of empty forms to display for adding new questions
-    fields = ("body", "type", "required")  # Fields to display in the inline
-    show_change_link = True  # Allow navigating to the question change form
+    extra = 1
+    fields = ("body", "type", "required")
+    show_change_link = True
 
 
 @admin.register(User)
@@ -16,9 +16,9 @@ class UserAdmin(admin.ModelAdmin):
 
 @admin.register(Form)
 class FormAdmin(admin.ModelAdmin):
-    list_display = ("title", "created_at")  # Fields to display in the list view
-    search_fields = ("title",)  # Add a search bar for forms
-    inlines = [QuestionInline]  # Add inline questions
+    list_display = ("title", "created_at")
+    search_fields = ("title",)
+    inlines = [QuestionInline]
 
 
 @admin.register(Question)
@@ -28,12 +28,12 @@ class QuestionAdmin(admin.ModelAdmin):
         "type",
         "form",
         "required",
-    )  # Fields to display in the list view
+    )
     list_filter = (
         "type",
         "required",
-    )  # Add filters for question type and required flag
-    search_fields = ("body", "form__title")  # Add a search bar for questions
+    )
+    search_fields = ("body", "form__title")
 
 
 @admin.register(Answer)
@@ -45,9 +45,9 @@ class AnswerAdmin(admin.ModelAdmin):
         "long_ans",
         "email_ans",
         "num_ans",
-    )  # Display answer details
-    list_filter = ("question__type",)  # Add a filter for question type
+    )
+    list_filter = ("question__type",)
     search_fields = (
         "question__body",
         "user__username",
-    )  # Search by question body or username
+    )
